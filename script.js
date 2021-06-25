@@ -21,10 +21,13 @@ window.addEventListener('resize',()=>{
     camera.updateProjectMatrix();
 })
 
+var raycaster=new THREE.Raycaster()
+var mouse = new THREE.Vector2();
 
-var geometry=new THREE.BoxGeometry(1,1,1)
+//var geometry=new THREE.BoxGeometry(1,1,1)
+var geometry=new THREE.SphereGeometry(1,120,120)
 var material=new THREE.MeshLambertMaterial({color:0xFFCC00})
-//var material=new THREE.MeshToonMaterial({color:0xFFCC00})
+// var material=new THREE.MeshToonMaterial({color:0xFFCC00})
 var mesh=new THREE.Mesh(geometry,material)
 
 mesh.position.x=-2
@@ -46,3 +49,14 @@ var render=function(){
 }
 
 render()
+
+
+this.tl=new TimelineMax().delay(.3);
+this.tl.to(this.mesh.position,.5,{x:1, ease:Expo.easeOut})
+this.tl.to(this.mesh.rotation, .5, {y: 5,ease:Expo.easeOut})
+this.tl.to(this.mesh.position,.5,{y:.5,ease:Expo.easeOut})
+this.tl.to(this.mesh.scale ,1.5,{x:3,y:3,ease:Expo.easeOut})
+this.tl.to(this.mesh.scale,.5,{x:2,y:2,ease:Expo.easeOut})
+this.tl.to(this.mesh.scale,.5,{x:.5,y:.5})
+
+Document.BODY.addEventListener("mousemove",onMouseMove())
